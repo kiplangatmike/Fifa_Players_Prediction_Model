@@ -17,11 +17,11 @@ Copy code
 import tensorflow as tf
 import numpy as np
 
-# Load the model
+## Load the model
 
-# Create a sample input array
+## Create a sample input array
 
-# Make a prediction
+## Make a prediction
 
 Evaluation
 The model has been evaluated on a test set and achieved a mean squared error of 4.5, indicating that the model is able to accurately predict the overall rating of FIFA players.
