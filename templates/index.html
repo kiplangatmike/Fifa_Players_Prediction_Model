@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+   <head>
+      <title>File Upload Form</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      <style>
+         body {
+           background-color: #f7f7f7;
+           font-family: Arial, sans-serif;
+         }
+     
+         h4 {
+           text-align: center;
+           margin-top: 50px;
+           margin-bottom: 30px;
+         }
+         nav{
+            background-color: #03032b;
+            height: 80px;
+         }
+     
+         .table-container {
+      width: 60%;
+      margin: 0 auto;
+    }
+         .form-container {
+           max-width: 500px;
+           margin: 0 auto;
+           background-color: #fff;
+           padding: 30px;
+           border-radius: 5px;
+           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+         }
+     
+         .form-control:focus {
+           border-color: #7c7cff;
+           box-shadow: none;
+         }
+     
+         .custom-file-input:focus ~ .custom-file-label {
+           border-color: #7c7cff;
+           box-shadow: none;
+         }
+     
+         .custom-file-label::after {
+           content: "Choose file";
+         }
+     
+         .custom-file-label::before {
+           content: "";
+           background-color: #7c7cff;
+           border-radius: .25rem;
+           display: inline-block;
+           vertical-align: middle;
+           height: 2rem;
+           width: 2rem;
+           line-height: 1.5rem;
+           text-align: center;
+           margin-right: .5rem;
+           color: #fff;
+         }
+     
+         .custom-file-input:lang(en)~.custom-file-label::after {
+           content: "Browse";
+         }
+       </style>
+     
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+         <div class="container-fluid">
+           <a class="navbar-brand text-center" href="#"><b>Sports Prediction Model</b></a>
+         </div>
+       </nav>
+      
+      <h4 class="fw-semibold">Upload a Players' CSV file to get predictions</h4>
+  <div class="container form-container">
+    <form  action="/predict" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Choose a file to upload:</label>
+        <div class="custom-file my-5">
+          <input type="file" class="custom-file-input" id="exampleFormControlFile1" name="file">
+        </div>
+      </div>
+      {% if message %}
+         <p>{{ message }}</p>
+      {% endif %}
+  
+      <button type="submit" class="btn btn-primary" value="Predict">Predict</button>
+    </form>
+  </div>
+  {% if predictions %}
+      <h4>Predictions for the top 10 players</h4>
+   
+<div class="table-container">
+   <table class="table table-striped table-bordered  mb-5 mx-auto">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Predicted Overall</th>
+          <th>Actual Overall</th>
+        </tr>
+      </thead>
+      <tbody>
+         {% for i in range(10) %}
+          <tr>
+            <td>{{ names[loop.index0] }}</td>
+            <td>{{ predictions[loop.index0] }}</td>
+            <td>{{ realvalues[loop.index0] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+</div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
